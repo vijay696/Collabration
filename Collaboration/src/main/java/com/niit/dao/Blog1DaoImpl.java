@@ -6,34 +6,35 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.niit.model.Forum;
+
+import com.niit.model.Blog1;
 
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-@Repository("forumDAO")
+@Repository("blog1DAO")
 @Transactional
-public class ForumDaoImpl implements ForumDao {
+public class Blog1DaoImpl implements Blog1Dao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public ForumDaoImpl() {
+	public Blog1DaoImpl() {
 		super();
 	}
 
-	public ForumDaoImpl(SessionFactory sessionFactory) {
+	public Blog1DaoImpl(SessionFactory sessionFactory) {
 		super();
 		this.sessionFactory = sessionFactory;
 	}
 
 	@Transactional
-	public void saveOrUpdateForum(Forum forum) {
+	public void saveOrUpdateBlog1(Blog1 blog1) {
 
 		Session session = sessionFactory.openSession();
 		try {
-			session.saveOrUpdate(forum);
+			session.save(blog1);
 			session.flush();
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
@@ -42,18 +43,18 @@ public class ForumDaoImpl implements ForumDao {
 	}
 
 	@Transactional
-	public Forum getForumById(String forumId) {
+	public Blog1 getBlog1ById(String blog1Id) {
 		Session session = sessionFactory.openSession();
-		return (Forum) session.get(Forum.class, forumId);
+		return (Blog1) session.get(Blog1.class, blog1Id);
 	}
 
 	@Transactional
-	public boolean delete(String forumId) {
+	public boolean delete(String blog1Id) {
 		// TODO Auto-generated method stub
 		try {
 
-			Forum forum = getForumById(forumId);
-			sessionFactory.getCurrentSession().delete(forum);
+			Blog1 blog1 = getBlog1ById(blog1Id);
+			sessionFactory.getCurrentSession().delete(blog1);
 			sessionFactory.getCurrentSession().flush();
 
 			return true;
@@ -66,12 +67,13 @@ public class ForumDaoImpl implements ForumDao {
 	}
 
 	@Transactional
-	public List<Forum> getAllForums() {
+	public List<Blog1> getAllBlog1s() {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Forum");
-		List<Forum> forums = query.list();
-		return forums;
+		Query query = session.createQuery("from Blog1");
+		List<Blog1> blog1s = query.list();
+		return blog1s;
 	}
 
-}
+	
 
+}
