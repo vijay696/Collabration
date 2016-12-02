@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
 import com.niit.dao.ForumDao;
+import com.niit.model.Event;
 import com.niit.model.Forum;
 
 @RestController
@@ -29,9 +31,15 @@ public class ForumController {
 		forumDao.saveOrUpdateForum(forum);
 	}
 	@RequestMapping(value="/viewForums",headers="Accept=application/json",method=RequestMethod.GET)
-	public List<Forum> viewForums()
+	public String viewForums()
 	{
-		return forumDao.getAllForums();
+		List<Forum> list = forumDao.getAllForums();
+		Gson gson = new Gson();
+		String object;
+		object=gson.toJson(list);
+		
+		return object;
+		/*return forumDao.getAllForums();*/
 	}
 	@RequestMapping(value="/updateForum",headers="Accept=application/json",method=RequestMethod.PUT)
 	public void updateForum(@RequestBody Forum forum)

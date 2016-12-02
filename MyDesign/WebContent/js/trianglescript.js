@@ -24,7 +24,7 @@ letzChaat.config(function($routeProvider) {
 	})
 	.when("/about",
 	{
-		templateUrl:"about.html",
+		templateUrl:"aboutus.html",
 		controller:'aboutController'
 	})
 	.when("/404",
@@ -149,6 +149,7 @@ letzChaat.controller('logoutController',function($scope,$rootScope,$http)
 			$rootScope.about=true;
 			$rootScope.home=true;
 			$rootScope.blog=false;
+			$rootScope.event=false;
 			$rootScope.forum=false;
 			$rootScope.jobs=false;
 			$rootScope.logout=false;
@@ -156,13 +157,14 @@ letzChaat.controller('logoutController',function($scope,$rootScope,$http)
 			$rootScope.adminBlog=false;
 			$rootScope.adminEvent=false;
 			$rootScope.adminJobs=false;
+			$rootScope.adminForum=false;
 
 			$rootScope.users=false;
 			
 			
-				
+				/*
 				$http.get('http://localhost:8080/Collaboration/logout');
-				$scope.message="You are successfully logged out...........";
+				*/$scope.message="You are successfully logged out...........";
 				
 			
 			
@@ -192,7 +194,7 @@ letzChaat.controller('loginController',['$scope','$http','$location','$rootScope
 			$rootScope.login=false;
 			$rootScope.register=false;
 			$rootScope.services=false;
-			$rootScope.about=false;
+			$rootScope.about=true;
 			$rootScope.home=false;
 			$rootScope.logout=true;
 			$rootScope.chat=true;
@@ -213,7 +215,7 @@ letzChaat.controller('loginController',['$scope','$http','$location','$rootScope
 			$rootScope.login=false;
 			$rootScope.register=false;
 			$rootScope.services=false;
-			$rootScope.about=false;
+			$rootScope.about=true;
 			$rootScope.home=false;
 			$rootScope.adminBlog=true;
 			$rootScope.users=true;
@@ -286,7 +288,7 @@ letzChaat.controller("adminBlogController",function($scope,$http,$rootScope)
 	$rootScope.login=false;
 	$rootScope.register=false;
 	$rootScope.services=false;
-	$rootScope.about=false;
+	$rootScope.about=true;
 	$rootScope.home=false;
 	$rootScope.adminBlog=true;
 	$rootScope.adminEvent=true;
@@ -294,6 +296,7 @@ letzChaat.controller("adminBlogController",function($scope,$http,$rootScope)
 	$rootScope.registeredUsers=true;
 	$rootScope.logout=true;
 	$rootScope.adminJobs=true;
+	$rootScope.adminForum=true;
 	
 	$rootScope.addEvent=true;
 	
@@ -402,10 +405,19 @@ letzChaat.controller('servicesController',function($scope)
 		}
 		);
 
-
-
 letzChaat.controller("blogController",function($scope,$http,$rootScope)	
 		{	
+	$rootScope.blog=true;
+	$rootScope.forum=true;
+	$rootScope.jobs=true;
+	$rootScope.login=false;
+	$rootScope.register=false;
+	$rootScope.services=false;
+	$rootScope.about=true;
+	$rootScope.home=false;
+	$rootScope.logout=true;
+	$rootScope.chat=true;
+	$rootScope.event=true;
 	
 	console.log("i am in blogController");
 	console.log("after this");
@@ -478,13 +490,15 @@ letzChaat.controller("adminEventController",function($scope,$http,$rootScope)
 	$rootScope.login=false;
 	$rootScope.register=false;
 	$rootScope.services=false;
-	$rootScope.about=false;
+	$rootScope.about=true;
 	$rootScope.home=false;
 	$rootScope.adminEvent=true;
 	$rootScope.users=true;
 	$rootScope.registeredUsers=true;
 	$rootScope.logout=true;
 	$rootScope.adminJobs=true;
+	$rootScope.adminForum=true;
+	
 	$rootScope.adminBlog=true;
 	$rootScope.addEvent=true;
 	
@@ -565,7 +579,18 @@ letzChaat.controller("adminEventController",function($scope,$http,$rootScope)
 
 letzChaat.controller("eventController",function($scope,$http,$rootScope)	
 		{	
-	
+	$rootScope.blog=true;
+	$rootScope.forum=true;
+	$rootScope.jobs=true;
+	$rootScope.login=false;
+	$rootScope.register=false;
+	$rootScope.services=false;
+	$rootScope.about=true;
+	$rootScope.home=false;
+	$rootScope.logout=true;
+	$rootScope.chat=true;
+	$rootScope.event=true;
+
 	console.log("i am in eventController");
 	console.log("after this");
 			 $http.get("http://localhost:8080/Collaboration/viewEvents")
@@ -651,13 +676,26 @@ letzChaat.controller('servicesController',function($scope)
 		);
 
 
-
-letzChaat.controller('userHomeController',function($scope,$rootScope)		
+letzChaat.controller('userHomeController',function($scope,$http,$rootScope)		
 		{
-			$rootScope.event=true;
+	$rootScope.blog=true;
+	$rootScope.forum=true;
+	$rootScope.jobs=true;
+	$rootScope.login=false;
+	$rootScope.register=false;
+	$rootScope.services=false;
+	$rootScope.about=true;
+	$rootScope.home=false;
+	$rootScope.logout=true;
+	$rootScope.chat=true;
+	$rootScope.event=true;
+
 			$scope.message="you are in userhome page";
 		}
 		);
+
+
+
 
 letzChaat.controller('adminController',function($scope,$rootScope)		
 		{
@@ -667,6 +705,9 @@ letzChaat.controller('adminController',function($scope,$rootScope)
 			
 			console.log("admin Controller  called");
 		
+
+			$rootScope.logout=true;
+			$rootScope.login=false;
 			
 			$rootScope.adminForum=true;
 			$rootScope.adminJobs=true;
@@ -676,8 +717,20 @@ letzChaat.controller('adminController',function($scope,$rootScope)
 		);
 
 
-letzChaat.controller('jobsController',function($scope,$http)		
+letzChaat.controller('jobsController',function($scope,$http,$rootScope)		
 		{
+	$rootScope.blog=true;
+	$rootScope.forum=true;
+	$rootScope.jobs=true;
+	$rootScope.login=false;
+	$rootScope.register=false;
+	$rootScope.services=false;
+	$rootScope.about=true;
+	$rootScope.home=false;
+	$rootScope.logout=true;
+	$rootScope.chat=true;
+	$rootScope.event=true;
+
 	console.log("inside job controller");
     $http.get("http://localhost:8080/Collaboration/viewAllJobs")
     .then(function (response) {$scope.jobs = response.data;});
@@ -780,8 +833,28 @@ letzChaat.controller('jobsController',function($scope,$http)
 		);
 
 
-letzChaat.controller('adminjobsController',function($scope,$http)		
+letzChaat.controller('adminjobsController',function($scope,$http,$rootScope)		
 		{
+
+	
+	$rootScope.login=false;
+	$rootScope.register=false;
+	$rootScope.services=false;
+	$rootScope.about=true;
+	$rootScope.home=false;
+	$rootScope.adminEvent=true;
+	$rootScope.users=true;
+	$rootScope.registeredUsers=true;
+	$rootScope.logout=true;
+	$rootScope.adminJobs=true;
+	$rootScope.adminForum=true;
+	
+	$rootScope.adminBlog=true;
+	
+	
+
+	
+	
 	console.log("inside adminjobsController");
     $http.get("http://localhost:8080/Collaboration/viewAllJobs")
     .then(function (response) {$scope.jobs = response.data;});
@@ -888,6 +961,18 @@ letzChaat.controller('adminjobsController',function($scope,$http)
 
 letzChaat.controller("forumController",function($scope,$http,$rootScope)	
 		{	
+	$rootScope.blog=true;
+	$rootScope.forum=true;
+	$rootScope.jobs=true;
+	$rootScope.login=false;
+	$rootScope.register=false;
+	$rootScope.services=false;
+	$rootScope.about=true;
+	$rootScope.home=false;
+	$rootScope.logout=true;
+	$rootScope.chat=true;
+	$rootScope.event=true;
+
 	
 	console.log("i am in forumController");
 	console.log("after this");
@@ -976,9 +1061,12 @@ letzChaat.controller("adminForumController",function($scope,$http,$rootScope)
 	$rootScope.login=false;
 	$rootScope.register=false;
 	$rootScope.services=false;
-	$rootScope.about=false;
+	$rootScope.about=true;
 	$rootScope.home=false;
 	$rootScope.adminForum=true;
+	$rootScope.adminBlog=true;
+	$rootScope.adminEvent=true;
+	
 	$rootScope.users=true;
 	$rootScope.registeredUsers=true;
 	$rootScope.logout=true;
