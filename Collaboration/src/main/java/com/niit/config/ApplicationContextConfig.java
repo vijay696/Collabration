@@ -18,12 +18,16 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.niit.dao.BlogDao;
 import com.niit.dao.Blog1Dao;
 import com.niit.dao.Blog1DaoImpl;
+import com.niit.dao.BlogCommentDAO;
+import com.niit.dao.BlogCommentDAOImpl;
 import com.niit.dao.BlogDaoImpl;
 import com.niit.dao.Blog1Dao;
 import com.niit.dao.EventDao;
 import com.niit.dao.EventDaoImpl;
 import com.niit.dao.ForumDao;
 import com.niit.dao.ForumDaoImpl;
+import com.niit.dao.FriendsDAO;
+import com.niit.dao.FriendsDAOImpl;
 import com.niit.dao.JobsDao;
 import com.niit.dao.JobsDaoImpl;
 import com.niit.dao.UsersDetailDao;
@@ -31,7 +35,9 @@ import com.niit.dao.UsersDetailDaoImpl;
 import com.niit.model.Blog;
 import com.niit.model.Event;
 import com.niit.model.Forum;
+import com.niit.model.Friends;
 import com.niit.model.Blog1;
+import com.niit.model.BlogComment;
 import com.niit.model.Job;
 import com.niit.model.JobRegistration;
 import com.niit.model.UsersDetail;
@@ -87,7 +93,9 @@ public class ApplicationContextConfig {
 		System.out.println("inside class ..");
 		sessionBuilder.addAnnotatedClass(Blog.class);
 		sessionBuilder.addAnnotatedClass(Blog1.class);
+		sessionBuilder.addAnnotatedClass(BlogComment.class);
 		sessionBuilder.addAnnotatedClass(Event.class);
+		sessionBuilder.addAnnotatedClass(Friends.class);
 		sessionBuilder.addAnnotatedClass(Job.class);
 		sessionBuilder.addAnnotatedClass(JobRegistration.class);
 		return sessionBuilder.buildSessionFactory();
@@ -133,6 +141,14 @@ public class ApplicationContextConfig {
 	}
 	
 	@Autowired
+	@Bean(name = "blogCommentDAO")
+	public BlogCommentDAO getBlogCommentDao(SessionFactory sessionFactory) {
+		return new BlogCommentDAOImpl(sessionFactory);
+	}
+
+	
+	
+	@Autowired
 	@Bean(name = "blog1DAO")
 	public Blog1Dao getBlog1Dao(SessionFactory sessionFactory) {
 		return new Blog1DaoImpl(sessionFactory);
@@ -144,5 +160,11 @@ public class ApplicationContextConfig {
 		return new ForumDaoImpl(sessionFactory);
 	}
 	
+	@Autowired
+	@Bean(name = "friendsDAO")
+	public FriendsDAO getFriendsDao(SessionFactory sessionFactory) {
+		return new FriendsDAOImpl(sessionFactory);
+	}
+
 	
 }
